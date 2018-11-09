@@ -5,6 +5,9 @@
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
+    "eslint": "^5.9.0",
+	"babel-eslint": "^8.0.2",
+    "eslint-plugin-react": "^7.11.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {
