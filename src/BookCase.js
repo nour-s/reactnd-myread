@@ -17,7 +17,7 @@ class BookCase extends React.Component
 					</div>
 				</div>
 				<div className="open-search">
-					<a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+					<a onClick={() => this.props.onOpenSearch() }>Add a book</a>
 				</div>
 			</div>
 		);
