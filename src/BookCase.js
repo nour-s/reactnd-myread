@@ -11,9 +11,7 @@ class BookCase extends React.Component
 				</div>
 				<div className="list-books-content">
 					<div>
-          				<Shelf name="Currently Reading"/>
-          				<Shelf name="Want to Read"/>
-          				<Shelf name="Read"/>
+          				 {this.props.shelfs.map(shelf => (<Shelf key={shelf.shelf} shelf={shelf}/>))}
 					</div>
 				</div>
 				<div className="open-search">
