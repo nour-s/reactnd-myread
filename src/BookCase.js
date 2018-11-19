@@ -12,7 +12,7 @@ class BookCase extends React.Component
 				</div>
 				<div className="list-books-content">
 					<div>
-          				 {this.props.shelfs.map(shelf => (<Shelf key={shelf.id} shelf={shelf}/>))}
+          				 {this.props.shelfs.map(shelf => (<Shelf onMoveBook={this.props.onMoveBook} key={shelf.id} shelf={shelf}/>))}
 					</div>
 				</div>
 				<div className="open-search">
