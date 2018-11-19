@@ -65,16 +65,25 @@ onSearch = e => {
   BooksAPI.search(e.target.value)
   .then(books => { 
     var shelfs = this.arrangeInShelfs(books);
-    this.setState({searchResult: shelfs}, () => console.log(this.state) );
+    this.setState({searchResult: shelfs});
   });
+}
+
+onMoveBook = (bookId, shelfId) => {
+  BooksAPI.update(bookId, shelfId)
+  .then(res=> 
+        BooksAPI.getAll().then(books => {
+    		this.setState({ shelfs: this.arrangeInShelfs(books) });
+    	})
+    );
 }
 
   render() {
     return (
 	<BrowserRouter>
      <div className="app">
-		<Route path="/" exact render={() => <BookCase shelfs={this.state.shelfs} />} />
-		<Route path="/search" exact render={() => <SearchBooks shelfs={this.state.searchResult} onSearch={this.onSearch} />} />
+		<Route path="/" exact render={() => <BookCase onMoveBook={this.onMoveBook} shelfs={this.state.shelfs} />} />
+		<Route path="/search" exact render={() => <SearchBooks shelfs={this.state.searchResult} onMoveBook={this.onMoveBook} onSearch={this.onSearch} />} />
 	</div>
 	</BrowserRouter>
     )
