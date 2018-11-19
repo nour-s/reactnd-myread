@@ -20,30 +20,39 @@ class App extends React.Component {
 
 componentDidMount(){
     BooksAPI.getAll().then(books => {
-    this.setState({ shelfs: this.categorizeBooks(books) });
+    this.setState({ shelfs: this.arrangeInShelfs(books) });
     });
 }
 
-categorizeBooks(books){
-  console.log("categorize: " , books);
- return books.reduce((result, book) => {
-   var shelf = result.find(i=>i.id === book.shelf);
+arrangeInShelfs(books){
+  //define a search shelf if we are searching
+  var searchShelfId = "searchShelf";
+  //Get all the books that the user has put in shelfs already
+  var allBooks = this.state.shelfs.reduce((books, shelf)=> {books.push(...shelf.books); return books;}, []);
+
+//put the books in a shelf according to their shelf property value
+ return books.reduce((shelfs, book) => {
+   // Find the shelf in the aggregated shelfs array if the book has a shelf id, otherwise find the search shelf.
+   var shelf = book.shelf ? shelfs.find(i=>i.id === book.shelf) : shelfs.find(i=> i.id === searchShelfId);
+   //If we haven't found the shelf in the aggregated array:
 	if(!shelf)
 	{
-		shelf = { id: book.shelf, name: shelfNames[book.shelf], books: [] };
-		result.push(shelf);
+      	//Create a new shelf with the shelf id specified by the first book found that belongs to that shelf.
+		shelf = { id: book.shelf || searchShelfId, name: shelfNames[book.shelf], books: [] };
+      	//Add it to the aggregated list of shelfs.
+		shelfs.push(shelf);
 	}
+   // Put the book in the shelf that it belongs to.
    shelf.books.push(book);
-	return result;
+   
+   //Now, if the book has no shelf specified (the book came from the search API), let's check if the user already put in a shelf.
+   if(!book.shelf)
+     //This will help the Book component to select an option from the 'Move to' context menu.
+     book.shelf = (allBooks.find(b => b.id === book.id) || { shelf:undefined }).shelf;
+   
+	return shelfs;
  }, []);
 }
-
-groupBy = function(array, key) {
-  return array.reduce(function(aggregated, item) {
-    (aggregated[item[key]]=aggregated[item[key]] || []).push(item);
-    return aggregated;
-  }, {});
-};
 
 onSearch = e => {
   var query = e.target.value;
@@ -52,10 +61,11 @@ onSearch = e => {
     this.setState({searchResult: []});
     return;
   }
+  
   BooksAPI.search(e.target.value)
-  .then(result => { 
-    // console.log("Found books", result);
-    this.setState({searchResult: this.categorizeBooks(result)});
+  .then(books => { 
+    var shelfs = this.arrangeInShelfs(books);
+    this.setState({searchResult: shelfs}, () => console.log(this.state) );
   });
 }
 
