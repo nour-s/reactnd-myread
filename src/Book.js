@@ -20,7 +20,7 @@ class Book extends React.Component
                             </div>
                           </div>
                           <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors.reduce((all, author)=> `${all} - ${author}`)}</div>
+						{ book.authors && <div className="book-authors">{book.authors.reduce((all, author)=> `${all} - ${author}`)}</div> }
                         </div>
 		); 
 }
