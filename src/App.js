@@ -1,22 +1,16 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookCase from './BookCase'
 import SearchBooks from './SearchBooks'
 import * as BooksAPI from './BooksAPI'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { debounced } from './Util';
 
 const shelfNames = {
   currentlyReading: "Currently Reading",
   "wantToRead": "Want To Read",
   "read" : "Read"
 }
-
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-
 
 class App extends React.Component {
   state = {
@@ -60,25 +54,9 @@ arrangeInShelfs(books){
  }, []);
 }
 
-debounced = function (fn, delay) {
-  let timerId;
-  return function (...args) {
-    //Simple hack to avoid loosing the event, if it is an event handler.
-    if(args[0].persist)
-      args[0].persist();
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-    timerId = setTimeout(() => {
-      fn(...args);
-      timerId = null;
-    }, delay);
-  }
-}
-
 onSearch = () =>
 {	
-  return this.debounced(e =>
+  return debounced(e =>
   {
     var query = e.target.value;
     if(query === "")
