@@ -85,12 +85,14 @@ class App extends React.Component {
 		});
 
 	// Handle moving the book to the passed shelf.
-	onMoveBook = (bookId, shelfId) => {
-		BooksAPI.update(bookId, shelfId).then(res =>
+	onMoveBook = (book, shelfId) => {
+		return BooksAPI.update(book, shelfId).then(res => {
+			// Reflect the change on the book object passed.
+			book.shelf = shelfId;
 			BooksAPI.getAll().then(books => {
 				this.setState({ shelfs: this.arrangeInShelfs(books) });
-			})
-		);
+			});
+		});
 	};
 
 	render() {
