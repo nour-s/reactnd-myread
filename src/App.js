@@ -79,6 +79,11 @@ class App extends React.Component {
 		}, 300);
 	};
 
+	onClearSearch = () =>
+		this.setState({
+			searchResult: []
+		});
+
 	onMoveBook = (bookId, shelfId) => {
 		BooksAPI.update(bookId, shelfId).then(res =>
 			BooksAPI.getAll().then(books => {
@@ -109,6 +114,7 @@ class App extends React.Component {
 								shelfs={this.state.searchResult}
 								onMoveBook={this.onMoveBook}
 								onSearch={this.onSearch()}
+								onClearSearch={this.onClearSearch}
 							/>
 						)}
 					/>
