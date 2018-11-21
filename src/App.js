@@ -12,6 +12,12 @@ const shelfNames = {
   "read" : "Read"
 }
 
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+
+
 class App extends React.Component {
   state = {
     shelfs: [],
@@ -54,19 +60,39 @@ arrangeInShelfs(books){
  }, []);
 }
 
-onSearch = e => {
-  var query = e.target.value;
-  if(query === "")
-  {
-    this.setState({searchResult: []});
-    return;
+debounced = function (fn, delay) {
+  let timerId;
+  return function (...args) {
+    //Simple hack to avoid loosing the event, if it is an event handler.
+    if(args[0].persist)
+      args[0].persist();
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(() => {
+      fn(...args);
+      timerId = null;
+    }, delay);
   }
-  
-  BooksAPI.search(e.target.value)
-  .then(books => { 
-    var shelfs = this.arrangeInShelfs(books);
-    this.setState({searchResult: shelfs});
-  });
+}
+
+onSearch = () =>
+{	
+  return this.debounced(e =>
+  {
+    var query = e.target.value;
+    if(query === "")
+    {
+      this.setState({searchResult: []});
+      return;
+    }
+
+    BooksAPI.search(query)
+    .then(books => {
+      var shelfs = books.error ? [] : this.arrangeInShelfs(books);
+      this.setState({searchResult: shelfs});
+    })
+  }, 300);
 }
 
 onMoveBook = (bookId, shelfId) => {
@@ -83,7 +109,7 @@ onMoveBook = (bookId, shelfId) => {
 	<BrowserRouter>
      <div className="app">
 		<Route path="/" exact render={() => <BookCase onMoveBook={this.onMoveBook} shelfs={this.state.shelfs} />} />
-		<Route path="/search" exact render={() => <SearchBooks shelfs={this.state.searchResult} onMoveBook={this.onMoveBook} onSearch={this.onSearch} />} />
+		<Route path="/search" exact render={() => <SearchBooks shelfs={this.state.searchResult} onMoveBook={this.onMoveBook} onSearch={this.onSearch()} />} />
 	</div>
 	</BrowserRouter>
     )

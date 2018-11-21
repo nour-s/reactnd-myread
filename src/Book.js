@@ -13,7 +13,7 @@ onShelfChanged = (select) => {
      	return (
           <div className="book">
                           <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${(book.imageLinks || {thumbnail:''}).thumbnail })` }}>
 							</div>
                             <div className="book-shelf-changer">
                               <select value={book.shelf || "none"} onChange={ this.onShelfChanged }>
