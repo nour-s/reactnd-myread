@@ -1,0 +1,6 @@
+{
+	"editor.formatOnSave": true,
+	"css.validate": false,
+	"prettier.stylelintIntegration": true,
+	"editor.tabSize": 4
+}
