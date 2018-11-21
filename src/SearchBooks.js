@@ -23,7 +23,7 @@ class SearchBooks extends React.Component
               </div>
             </div>
             <div className="search-books-results">
-			{this.props.shelfs.length > 0 && <BookCase shelfs={this.props.shelfs} />}
+			{this.props.shelfs.length > 0 && <BookCase shelfs={this.props.shelfs} onMoveBook={this.props.onMoveBook} />}
               <ol className="books-grid">
 			  </ol>
             </div>
