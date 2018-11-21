@@ -6,6 +6,7 @@ import * as BooksAPI from "./BooksAPI";
 import { BrowserRouter, Route } from "react-router-dom";
 import { debounced } from "./Util";
 
+//Map the shelf id to a friendly name.
 const shelfNames = {
 	currentlyReading: "Currently Reading",
 	wantToRead: "Want To Read",
@@ -14,11 +15,12 @@ const shelfNames = {
 
 class App extends React.Component {
 	state = {
-		shelfs: [],
-		searchResult: []
+		shelfs: [], // the list of shelfs with books inside them
+		searchResult: [] // the search results if the Search component runs one
 	};
 
 	componentDidMount() {
+		// When we first mount the component, let's bring the user books (arranged in shelfs).
 		BooksAPI.getAll().then(books => {
 			this.setState({ shelfs: this.arrangeInShelfs(books) });
 		});
@@ -64,26 +66,25 @@ class App extends React.Component {
 		}, []);
 	}
 
-	onSearch = () => {
-		return debounced(e => {
-			var query = e.target.value;
-			if (query === "") {
-				this.setState({ searchResult: [] });
-				return;
-			}
+	onSearch = debounced(query => {
+		if (query === "") {
+			this.setState({ searchResult: [] });
+			return;
+		}
 
-			BooksAPI.search(query).then(books => {
-				var shelfs = books.error ? [] : this.arrangeInShelfs(books);
-				this.setState({ searchResult: shelfs });
-			});
-		}, 300);
-	};
+		BooksAPI.search(query).then(books => {
+			var shelfs = books.error ? [] : this.arrangeInShelfs(books);
+			this.setState({ searchResult: shelfs });
+		});
+	}, 300);
 
+	// Handle clearing the search results
 	onClearSearch = () =>
 		this.setState({
 			searchResult: []
 		});
 
+	// Handle moving the book to the passed shelf.
 	onMoveBook = (bookId, shelfId) => {
 		BooksAPI.update(bookId, shelfId).then(res =>
 			BooksAPI.getAll().then(books => {
@@ -107,14 +108,17 @@ class App extends React.Component {
 						)}
 					/>
 					<Route
-						path="/search"
+						path="/search:query?"
 						exact
-						render={() => (
+						render={props => (
 							<SearchBooks
 								shelfs={this.state.searchResult}
 								onMoveBook={this.onMoveBook}
-								onSearch={this.onSearch()}
+								onSearch={this.onSearch}
 								onClearSearch={this.onClearSearch}
+								initQuery={new URLSearchParams(
+									props.location.search
+								).get("query")}
 							/>
 						)}
 					/>

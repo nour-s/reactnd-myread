@@ -3,9 +3,29 @@ import { Link } from "react-router-dom";
 import BookCase from "./BookCase";
 
 class SearchBooks extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { searchQuery: props.initQuery || "" };
+	}
+
 	componentWillUnmount() {
 		this.props.onClearSearch();
 	}
+
+	componentDidMount() {
+		//If the search component was called with a search query specified already
+		if (this.props.initQuery) {
+			//Let's run the search for the first time
+			this.props.onSearch(this.props.initQuery);
+		}
+	}
+
+	// A handler for the search text box
+	onValueChange = e => {
+		var query = e.target.value;
+		this.setState({ searchQuery: query });
+		this.props.onSearch(query);
+	};
 
 	render() {
 		return (
@@ -25,8 +45,9 @@ class SearchBooks extends React.Component {
                 */}
 						<input
 							type="text"
-							onChange={this.props.onSearch}
+							onChange={this.onValueChange}
 							placeholder="Search by title or author"
+							value={this.state.searchQuery}
 						/>
 					</div>
 				</div>
