@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import BookCase from "./BookCase";
 
@@ -64,5 +65,13 @@ class SearchBooks extends React.Component {
 		);
 	}
 }
+
+SearchBooks.propTypes = {
+	initQuery: PropTypes.string,
+	shelfs: PropTypes.array,
+	onMoveBook: PropTypes.func,
+	onSearch: PropTypes.func,
+	onClearSearch: PropTypes.func
+};
 
 export default SearchBooks;
