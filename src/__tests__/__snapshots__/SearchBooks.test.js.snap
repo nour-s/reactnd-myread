@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBooks test SearchBooks should match snapshot 1`] = `
+<div
+  className="search-books"
+>
+  <div
+    className="search-books-bar"
+  >
+    <a
+      className="close-search"
+      href="/"
+      onClick={[Function]}
+    >
+      Close
+       
+    </a>
+    <div
+      className="search-books-input-wrapper"
+    >
+      <input
+        onChange={[Function]}
+        placeholder="Search by title or author"
+        type="text"
+        value="anyQuery"
+      />
+    </div>
+  </div>
+  <div
+    className="search-books-results"
+  >
+    <div
+      className="list-books"
+    >
+      <div
+        className="list-books-title"
+      >
+        <h1>
+          MyReads
+        </h1>
+      </div>
+      <div
+        className="list-books-content"
+      >
+        <div>
+          <div
+            className="bookshelf"
+          >
+            <h2
+              className="bookshelf-title"
+            />
+            <div
+              className="bookshelf-books"
+            >
+              <ol
+                className="books-grid"
+              >
+                <li>
+                  <div
+                    className="book"
+                  >
+                    <div
+                      className="book-top"
+                    >
+                      <div
+                        className="book-cover"
+                        style={
+                          Object {
+                            "backgroundImage": "url()",
+                            "height": 193,
+                            "width": 128,
+                          }
+                        }
+                      />
+                      <div
+                        className="book-shelf-changer"
+                      >
+                        <select
+                          onChange={[Function]}
+                          value="none"
+                        >
+                          <option
+                            disabled={true}
+                            value="move"
+                          >
+                            Move to...
+                          </option>
+                          <option
+                            disabled={false}
+                            value="currentlyReading"
+                          >
+                            Currently Reading
+                          </option>
+                          <option
+                            disabled={false}
+                            value="read"
+                          >
+                            Read
+                          </option>
+                          <option
+                            disabled={false}
+                            value="none"
+                          >
+                            None
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      className="book-title"
+                    >
+                      Title 1
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div
+            className="bookshelf"
+          >
+            <h2
+              className="bookshelf-title"
+            />
+            <div
+              className="bookshelf-books"
+            >
+              <ol
+                className="books-grid"
+              >
+                <li>
+                  <div
+                    className="book"
+                  >
+                    <div
+                      className="book-top"
+                    >
+                      <div
+                        className="book-cover"
+                        style={
+                          Object {
+                            "backgroundImage": "url()",
+                            "height": 193,
+                            "width": 128,
+                          }
+                        }
+                      />
+                      <div
+                        className="book-shelf-changer"
+                      >
+                        <select
+                          onChange={[Function]}
+                          value="none"
+                        >
+                          <option
+                            disabled={true}
+                            value="move"
+                          >
+                            Move to...
+                          </option>
+                          <option
+                            disabled={false}
+                            value="currentlyReading"
+                          >
+                            Currently Reading
+                          </option>
+                          <option
+                            disabled={false}
+                            value="read"
+                          >
+                            Read
+                          </option>
+                          <option
+                            disabled={false}
+                            value="none"
+                          >
+                            None
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      className="book-title"
+                    >
+                      Title 2
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="open-search"
+      />
+    </div>
+    <ol
+      className="books-grid"
+    />
+  </div>
+</div>
+`;

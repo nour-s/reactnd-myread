@@ -2,6 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Book extends React.Component {
+	options = [
+		{ value: "move", text: "Move to...", disabled: true },
+		{ value: "currentlyReading", text: "Currently Reading" },
+		{ value: "read", text: "Read" },
+		{ value: "none", text: "None" }
+	];
+
 	onShelfChanged = select => {
 		var shelfId = select.target.value;
 		this.props.onMoveBook(this.props.book, shelfId);
@@ -27,15 +34,15 @@ class Book extends React.Component {
 							value={book.shelf || "none"}
 							onChange={this.onShelfChanged}
 						>
-							<option value="move" disabled>
-								Move to...
-							</option>
-							<option value="currentlyReading">
-								Currently Reading
-							</option>
-							<option value="wantToRead">Want to Read</option>
-							<option value="read">Read</option>
-							<option value="none">None</option>
+							{this.options.map(o => (
+								<option
+									key={o.value}
+									value={o.value}
+									disabled={o.disabled || false}
+								>
+									{o.text}
+								</option>
+							))}
 						</select>
 					</div>
 				</div>

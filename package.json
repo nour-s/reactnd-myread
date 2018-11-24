@@ -1,17 +1,20 @@
 {
 	"dependencies": {
+		"enzyme": "^3.7.0",
 		"prettier": "^1.15.2",
 		"prop-types": "^15.6.2",
-		"react": "^15.5.4",
-		"react-dom": "^15.5.4",
-		"react-router-dom": "^4.3.1"
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-router-dom": "^4.3.1",
+		"react-scripts": "2.1.1",
+		"react-test-renderer": "^16.6.3"
 	},
 	"devDependencies": {
-		"babel-eslint": "^8.0.2",
-		"eslint": "^5.9.0",
 		"eslint-plugin-react": "^7.11.1",
 		"prettier-eslint-cli": "^4.7.1",
-		"react-scripts": "0.9.5"
+		"enzyme-adapter-react-16": "^1.7.0",
+		"jest-environment-enzyme": "^7.0.1",
+		"jest-enzyme": "^7.0.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -19,5 +22,14 @@
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
 		"format": "prettier-eslint \"src/*.js\" --write"
-	}
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
 }

@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Book test Book should match snapshot 1`] = `
+<div
+  className="book"
+>
+  <div
+    className="book-top"
+  >
+    <div
+      className="book-cover"
+      style={
+        Object {
+          "backgroundImage": "url(url)",
+          "height": 193,
+          "width": 128,
+        }
+      }
+    />
+    <div
+      className="book-shelf-changer"
+    >
+      <select
+        onChange={[Function]}
+        value="a shelf"
+      >
+        <option
+          disabled={true}
+          value="move"
+        >
+          Move to...
+        </option>
+        <option
+          disabled={false}
+          value="currentlyReading"
+        >
+          Currently Reading
+        </option>
+        <option
+          disabled={false}
+          value="read"
+        >
+          Read
+        </option>
+        <option
+          disabled={false}
+          value="none"
+        >
+          None
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="book-title"
+  >
+    a book
+  </div>
+  <div
+    className="book-authors"
+  >
+    author 1 - author 2
+  </div>
+</div>
+`;

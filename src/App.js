@@ -21,9 +21,9 @@ class App extends React.Component {
 
 	componentDidMount() {
 		// When we first mount the component, let's bring the user books (arranged in shelfs).
-		BooksAPI.getAll().then(books => {
-			this.setState({ shelfs: this.arrangeInShelfs(books) });
-		});
+		BooksAPI.getAll().then(books =>
+			this.setState({ shelfs: this.arrangeInShelfs(books) })
+		);
 	}
 
 	arrangeInShelfs(books) {
@@ -106,6 +106,7 @@ class App extends React.Component {
 							<BookCase
 								onMoveBook={this.onMoveBook}
 								shelfs={this.state.shelfs}
+								showSearchLink={true}
 							/>
 						)}
 					/>

@@ -22,7 +22,9 @@ class BookCase extends React.Component {
 					</div>
 				</div>
 				<div className="open-search">
-					<Link to={{ pathname: "/search" }}>Add a book</Link>
+					{(this.props.showSearchLink || false) && (
+						<Link to={{ pathname: "/search" }}>Add a book</Link>
+					)}
 				</div>
 			</div>
 		);
